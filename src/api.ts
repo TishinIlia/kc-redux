@@ -1,16 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
-
-interface GoodsAPI {
-  image: string;
-  name: string;
-  info: string;
-  price: number;
-}
-
-interface GoodsItem extends GoodsAPI {
-  id: string;
-}
+import GoodsItem from "./types/GoodsItem";
+import GoodsAPI from "./types/GoodsAPI";
 
 export const initializeAPI = () => {
   const firebaseConfig = {
@@ -26,9 +17,6 @@ export const initializeAPI = () => {
   getFirestore();
 };
 
-/**
- * Запрашивает товары по АПИ
- */
 export const getGoods = async (): Promise<GoodsItem[]> => {
   const db = getFirestore();
   const querySnapshot = await getDocs(collection(db, "food-goods"));
